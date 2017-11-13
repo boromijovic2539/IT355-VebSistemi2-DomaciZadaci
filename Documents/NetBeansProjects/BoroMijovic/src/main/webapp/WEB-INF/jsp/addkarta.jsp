@@ -3,7 +3,7 @@
 <%@ include file="header.jsp" %>
 <html>
     <head>
-        <title>Unos studenta</title>
+        <title>Unos nove karte</title>
     </head>
     <body>
         <h2>Dodaj novu kartu</h2>

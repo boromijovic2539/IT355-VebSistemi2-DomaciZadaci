@@ -5,6 +5,7 @@
  */
 package com.it355.boromijovic;
 
+import com.it355.boromijovic.dao.KartaDao;
 import com.it355.boromijovic.model.Karta;
 import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,24 @@ public class KartaController {
     @Autowired
     private MessageSource messageSource;
 
+    @Autowired
+    private KartaDao kartaDao;
+
     // GET method
     @RequestMapping(value = "/karta", method = RequestMethod.GET)
     public ModelAndView karta() {
         System.out.println("Calling MessageSource");
         System.out.println(messageSource.getMessage("domacin", null, new Locale(("en-Latn-US"))));
+        
+        System.out.println("Calling studentDao");
+        kartaDao.addKarta();
+        kartaDao.addKartaAround("Zvezda", "Keln");
+        try {
+            kartaDao.addKartaThrowException();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         return new ModelAndView("addkarta", "command", new Karta());
     }
 
