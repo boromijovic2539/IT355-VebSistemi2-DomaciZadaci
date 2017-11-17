@@ -6,6 +6,9 @@ http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 http://www.springframework.org/schema/security
 http://www.springframework.org/schema/security/spring-security-3.2.xsd">
     <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/success" access="permitAll" method="POST"/>
+        <intercept-url pattern="/failure" access="permitAll" method="POST"/>
+        <intercept-url pattern="/loginFlow" access="permitAll" method="POST"/>
         <intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
         <access-denied-handler error-page="/403" />
         <form-login login-page="/login"

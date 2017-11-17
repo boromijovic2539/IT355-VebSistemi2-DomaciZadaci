@@ -14,7 +14,6 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-    
     <!--SpringSecurity-->
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
