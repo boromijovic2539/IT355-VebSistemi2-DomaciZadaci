@@ -29,7 +29,7 @@ public class InterceptorLog implements MethodBeforeAdvice {
         System.out.println("******");
     }
 
-    @After("execution(* com.it355.boromijovic.dao.impl.KartaDaoImpl.addKarta(..))")
+    @After("execution(* com.it355.boromijovic.dao.impl.KartaDaoImpl.addKarta())")
     public void logAfter(JoinPoint joinPoint) {
         System.out.println("logAfter() metoda je pozvana!");
         System.out.println("presretanje : "

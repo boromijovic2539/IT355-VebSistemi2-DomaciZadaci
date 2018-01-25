@@ -28,6 +28,10 @@ public class LoginController {
         model.addObject("poruka", "Drugi domaći zadatak");
         model.addObject("message", "Everyone can access this page!");
         model.setViewName("pocetna");
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName(); //get logged in username
+        System.out.println(""+name);
         return model;
     }
 

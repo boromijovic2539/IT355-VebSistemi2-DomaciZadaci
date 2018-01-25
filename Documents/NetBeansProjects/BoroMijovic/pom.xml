@@ -16,6 +16,8 @@
         <jstl.version>1.2</jstl.version>
         <javax.servlet.version>3.0.1</javax.servlet.version>
         <spring.security.version>3.2.3.RELEASE</spring.security.version>
+        <jackson.version>2.6.3</jackson.version>
+        <jacksonmapper.version>1.9.13</jacksonmapper.version>
         <mysql.connector.version>5.1.30</mysql.connector.version>
     </properties>
     

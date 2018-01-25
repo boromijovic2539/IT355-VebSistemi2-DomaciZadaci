@@ -9,7 +9,11 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
         <intercept-url pattern="/success" access="permitAll" method="POST"/>
         <intercept-url pattern="/failure" access="permitAll" method="POST"/>
         <intercept-url pattern="/loginFlow" access="permitAll" method="POST"/>
+        
         <intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/addkarta" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/karte" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/korisnici" access="hasRole('ROLE_ADMIN')" />
         <access-denied-handler error-page="/403" />
         <form-login login-page="/login"
                     default-target-url="/"
@@ -22,8 +26,8 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
     <authentication-manager>
         <authentication-provider>
             <jdbc-user-service data-source-ref="dataSource"
-                               users-by-username-query="select username, password, enabled from users where username=?"
-                               authorities-by-username-query="select username, role from user_roles where username =? " />
+                               users-by-username-query="select USERNAME, PASSWORD, ENABLED from users where USERNAME=?"
+                               authorities-by-username-query="select USERNAME, ROLE from user_roles JOIN users ON user_roles.ID_USERS = users.ID_USERS where USERNAME =? " />
         </authentication-provider>
     </authentication-manager>
 </beans:beans>

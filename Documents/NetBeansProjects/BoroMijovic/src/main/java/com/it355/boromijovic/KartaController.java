@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class KartaController {
-
+/*
     @Autowired
     private MessageSource messageSource;
 
@@ -35,7 +35,7 @@ public class KartaController {
     public ModelAndView karta() {
         System.out.println("Calling MessageSource");
         System.out.println(messageSource.getMessage("domacin", null, new Locale(("en-Latn-US"))));
-       /* 
+        
         System.out.println("Calling studentDao");
         kartaDao.addKarta();
         kartaDao.addKartaAround("Zvezda", "Keln");
@@ -44,7 +44,7 @@ public class KartaController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        */
+        
         return new ModelAndView("addkarta", "command", new Karta());
     }
 
@@ -65,5 +65,5 @@ public class KartaController {
     public String preview(@ModelAttribute Karta karta, ModelMap model) {
 
         return "addkarta";
-    }
+    }*/
 }

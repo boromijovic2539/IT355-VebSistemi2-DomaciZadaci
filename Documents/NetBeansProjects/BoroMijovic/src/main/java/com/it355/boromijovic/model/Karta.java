@@ -5,40 +5,52 @@
  */
 package com.it355.boromijovic.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author vesna.lazarevic
  */
-public class Karta {
+@SuppressWarnings("serial")
+public class Karta implements Serializable {
 
-    int id;
+    int id_karta;
     String domacin;
     String gost;
     String vreme_utakmice;
     String cena_karte;
     String sektor;
     String broj_sedista;
+    int kolicina;
 
     public Karta() {
     }
 
-    public Karta(int id, String domacin, String gost, String vremeUtakmice, String cenaKarte, String sektor, String brojSedista) {
-        this.id = id;
+    public Karta(int id_karta, String domacin, String gost, String vreme_utakmice, String cena_karte, String sektor, String broj_sedista, int kolicina) {
+        this.id_karta = id_karta;
         this.domacin = domacin;
         this.gost = gost;
-        this.vreme_utakmice = vremeUtakmice;
-        this.cena_karte = cenaKarte;
+        this.vreme_utakmice = vreme_utakmice;
+        this.cena_karte = cena_karte;
         this.sektor = sektor;
-        this.broj_sedista = brojSedista;
+        this.broj_sedista = broj_sedista;
+        this.kolicina = kolicina;
     }
 
-    
-    public int getId() {
-        return id;
+    public int getKolicina() {
+        return kolicina;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setKolicina(int kolicina) {
+        this.kolicina = kolicina;
+    }
+
+    public int getId_karta() {
+        return id_karta;
+    }
+
+    public void setId_karta(int id_karta) {
+        this.id_karta = id_karta;
     }
 
     public String getDomacin() {
@@ -91,7 +103,7 @@ public class Karta {
 
     @Override
     public String toString() {
-        return "Karta{" + "id=" + id + ", domacin=" + domacin + ", gost=" + gost + ", vremeUtakmice=" + vreme_utakmice + ", cenaKarte=" + cena_karte + ", sektor=" + sektor + ", brojSedista=" + broj_sedista + '}';
+        return "Karta{" + "id_karta=" + id_karta + ", domacin=" + domacin + ", gost=" + gost + ", vreme_utakmice=" + vreme_utakmice + ", cena_karte=" + cena_karte + ", sektor=" + sektor + ", broj_sedista=" + broj_sedista + ", kolicina=" + kolicina + '}';
     }
 
 }
