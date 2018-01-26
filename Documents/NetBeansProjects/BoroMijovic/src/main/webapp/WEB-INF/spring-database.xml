@@ -17,7 +17,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
     <!--DatabaseConfig-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/it355domaci"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/it355domaci"/> <!-- baza8 -->
         <property name="username" value="root" />
         <property name="password" value="" />
     </bean>
@@ -29,13 +29,12 @@ http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
     </bean>
     
     <!--DAO-->
-    <bean name="kartaDao" class="com.it355.boromijovic.dao.impl.KartaDaoImpl">
+     <bean name="kartaDao" class="com.it355.boromijovic.dao.impl.KartaDaoImpl">
         <property name="dataSource" ref="dataSource" />
     </bean>
     <bean name="korisnikDao" class="com.it355.boromijovic.dao.impl.KorisnikDaoImpl">
         <property name="dataSource" ref="dataSource" />
     </bean>
-    
     <!--Transaction-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />

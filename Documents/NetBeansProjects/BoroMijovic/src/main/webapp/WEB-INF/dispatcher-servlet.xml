@@ -1,23 +1,81 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:flow="http://www.springframework.org/schema/webflow-config"
-       
-       xsi:schemaLocation="http://www.springframework.org/schema/webflow-config
+<beans 
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:flow="http://www.springframework.org/schema/webflow-config"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:p="http://www.springframework.org/schema/p" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+http://www.springframework.org/schema/webflow-config
 http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.4.xsd
-http://www.springframework.org/schema/beans 
-http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/mvc/spring-mvc.xsd
 http://www.springframework.org/schema/context
-http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/aop  
+http://www.springframework.org/schema/aop/spring-aop.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd">
     
     <context:component-scan base-package="com.it355.boromijovic" />
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+    <!--Kako bi Hibernate mogao da se poveže na bazu podataka
+    potrebno je kreirati sesiju. To radimo u sledećem
+    zrnu-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="configLocation" >
+            <!--Dodavanje path-a na kome se nalaze podešavanja
+            za Hibernate -->
+            <value>classpath:hibernate.cfg.xml</value>
+        </property>
+        <!-- Dodavanje path-a paketa u kome se nalaze entity
+        fajlovi na osnovu kojih
+        će Hibernate kreirati bazu i upisivati u nju-->
+        <property name="packagesToScan">
+            <list>
+                <value>com.it355.hibernatecrud.entity</value>
+            </list>
+        </property>
+    </bean>
+    
+    <!--Transakcija se dešava između baze i programa korišćenjem
+    Transaction Managera koji definišemo ovde
+    On koristi sesiju koju smo definisali iznad -->
+    <tx:annotation-driven  transaction-manager="transactionManager"/>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="kardDao" class="com.it355.hibernatecrud.dao.impl.KardDaoImpl">
+  
+    </bean>
+    <bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+    
+    
+    <mvc:annotation-driven conversion-service="conversionService" /> <!-- bilo je samo driven i kraj -->
+    <tx:annotation-driven />
+    
+    <mvc:default-servlet-handler />
+    <mvc:resources mapping="/resources/**" location="/WEB-INF/" />
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean  class="com.it355.hibernatecrud.converter.IntegerToKlub" />
+            </set>
+        </property>
+    </bean>
+    <!-- ////////////////////////////////////////////////// -->
+    
+    <bean
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean>
-
+   
+    <import resource="flow-definition.xml"/>
+    
 </beans>
